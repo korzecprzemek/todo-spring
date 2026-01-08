@@ -2,6 +2,8 @@
 
 ## A simple web application built with Spring Boot
 
+Allows the user to add, remove and read tasks from a .csv file <br>
+and presents the list as a table.
 ## Goals
 - to build a robust backend architecture
 - learn a new database engine

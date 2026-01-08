@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        table { border-collapse: collapse; width: 100%; }
+        th, td { border: 1px solid #ccc; padding: 8px; text-align: left; }
+        th { background: #f3f3f3; }
+    </style>
+</head>
+<body>
+    <h1>These are Your tasks for today!</h1>
+    <table>
+        <thead>
+        <tr>
+            <th>Task</th>
+            <th>Start</th>
+            <th>End</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr th:each="t : ${tasks}">
+            <td th:text="${t.taskName}">Task name</td>
+            <td th:text="${t.taskStartTime}">00:00</td>
+            <td th:text="${t.taskEndTime}">00:00</td>
+        </tr>
+        <tr th:if="${#lists.isEmpty(tasks)}">
+            <td colspan="3">No Tasks!</td>
+        </tr>
+        </tbody>
+    </table>
+        <form method="post" action = "/tasks/add">
+            <input name="taskName" placeholder="Task name"/>
+            <input name="taskStartTime" placeholder="Task start time (HH:mm)"/>
+            <input name="taskEndTime" placeholder="Task end time(HH:mm)"/>
+            <button type="submit">Add</button>
+        </form>
+        <form method="post" action = "/tasks/read">
+            <button type="submit">Read your tasks from the CSV!</button>
+        </form>
+</body>
+</html>

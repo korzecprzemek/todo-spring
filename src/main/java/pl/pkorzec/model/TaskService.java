@@ -5,22 +5,32 @@ import org.springframework.stereotype.Service;
 import java.time.LocalTime;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
+import java.time.LocalDateTime;
 
 @Service
 public class TaskService {
     private final TaskList taskList = new TaskList();
     private final AtomicLong nextId = new AtomicLong(1);
 
-    public void addTask(String taskName, LocalTime taskStartTime, LocalTime taskEndTime){
-        long id = this.nextId.getAndIncrement();
-        Task task = new Task(id,taskName,taskStartTime,taskEndTime);
-
+    public Task addTask(Task task){
+        task.setId(nextId.getAndIncrement());
+        if(task.getCreatedAt() == null){
+            task.setCreatedAt(LocalDateTime.now());
+        }
+        if(task.getPriority() == null){
+            task.setPriority(Priority.MEDIUM);
+        }
         taskList.addTask(task);
+        return task;
     }
-    public void addTask(Task task){
-        long id = nextId.getAndIncrement();
-        Task withId = new Task(id, task.getTaskName(),task.getTaskStartTime(),task.getTaskEndTime());
-        taskList.addTask(withId);
+    public Task addFromForm(TaskFormDTO dto){
+        Task task = new Task(
+                dto.taskName(),
+                dto.priority(),
+                false,
+                null
+        );
+        return addTask(task);
     }
 
     public List<Task> getAll() {

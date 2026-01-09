@@ -9,13 +9,10 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
 public class TaskCsvReader {
-
-    private static final DateTimeFormatter TIME_FORMAT = DateTimeFormatter.ofPattern("H:mm");
 
     public List<Task> read(String filePath) throws IOException, CsvException {
         String dirPath = new File("").getAbsolutePath();
@@ -24,14 +21,27 @@ public class TaskCsvReader {
 
         try(CSVReader reader = new CSVReader(new FileReader(filePath))) {
             for(String[] row : reader.readAll()){
+                if (row.length == 0) continue;
+
+                String name = unquote(row[0]);
+                String priorityRaw = row.length > 1 ? unquote(row[1]) : null;
+
                 Task t = new Task(
-                        row[0].replace("\"",""),
-                        LocalTime.parse(row[1],TIME_FORMAT),
-                        LocalTime.parse(row[2],TIME_FORMAT)
+                        name,
+                        Priority.fromString(priorityRaw),
+                        false,
+                        null
                 );
+                t.setTaskName(name);
+                t.setPriority(Priority.fromString(priorityRaw));
+                t.setDone(false);
                 taskList.add(t);
             }
         }
         return taskList;
+    }
+
+    private String unquote(String s) {
+        return s == null ? null : s.replace("\"", "").trim();
     }
 }

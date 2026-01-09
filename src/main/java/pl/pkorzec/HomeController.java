@@ -2,10 +2,7 @@ package pl.pkorzec;
 
 import com.opencsv.exceptions.CsvException;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.validation.BindingResult;
 import org.springframework.ui.Model;
 import jakarta.validation.Valid;
@@ -63,6 +60,11 @@ public class HomeController {
     @RequestMapping("/test")
     String test(){
         return "test.html";
+    }
+    @PostMapping("tasks/toggle")
+    public String toggle(@RequestParam Long id){
+        taskService.toggleDone(id);
+        return "redirect:/";
     }
 
 }

@@ -27,13 +27,19 @@
             <td th:text="${stat.count}">1</td>
             <td th:text="${t.taskName}">Task name</td>
             <td th:text="${t.priority}">Task Priority</td>
-            <td th:text="${t.isDone}">Status</td>
+            <td th:text="${t.done}">Status</td>
             <td th:text="${#temporals.format(t.createdAt,'dd-MM-yyyy HH:mm')}">Created at</td>
 
             <td>
                 <form th:action="@{/tasks/remove}" method="post" style="display:inline;">
                     <input type="hidden" name="id" th:value="${t.id}">
                     <button type="submit">Done!</button>
+                </form>
+            </td>
+            <td>
+                <form th:action="@{/tasks/toggle}" method="post">
+                    <input type="hidden" name="id" th:value="${t.id}">
+                    <button type="submit">Toggle Done</button>
                 </form>
             </td>
         </tr>
@@ -58,6 +64,7 @@
             </select>
             <button type="submit">Add</button>
         </form>
+
 
         <form method="post" action = "/tasks/read">
             <button type="submit">Read your tasks from the CSV!</button>

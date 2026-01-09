@@ -16,9 +16,17 @@ public class TaskList {
             System.out.println(task.getTaskEndTime());
         }
     }
-    public void addTask(String taskName,LocalTime taskStartTime, LocalTime taskEndTime){
-        Task task = new Task(taskName,taskStartTime,taskEndTime);
-        this.taskList.add(task);
+    public Task findById(Long id){
+        for(Task task : this.taskList) {
+            if(task.getId().equals(id)){
+                return task;
+            }
+        }
+        return null;
+    }
+    public void removeById(Long id){
+        Task task = findById(id);
+        this.taskList.remove(task);
     }
     public void addTask(Task task){
         this.taskList.add(task);

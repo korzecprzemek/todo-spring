@@ -6,11 +6,24 @@ public class Task {
     private String taskName;
     private LocalTime taskStartTime;
     private LocalTime taskEndTime;
+    private Long id;
 
-    public Task(String taskName, LocalTime taskStartTime, LocalTime taskEndTime){
+    public Task(Long id,String taskName, LocalTime taskStartTime, LocalTime taskEndTime){
+        this.id = id;
         this.taskName = taskName;
         this.taskStartTime = taskStartTime;
         this.taskEndTime = taskEndTime;
+    }
+    public Task(String taskName,LocalTime taskStartTime,LocalTime taskEndTime){
+        this.taskName = taskName;
+        this.taskStartTime = taskStartTime;
+        this.taskEndTime = taskEndTime;
+    }
+    public Long getId(){
+        return this.id;
+    }
+    public void setId(Long id) {
+        this.id = id;
     }
     public String getTaskName(){
         return taskName;

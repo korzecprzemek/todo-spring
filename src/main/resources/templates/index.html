@@ -16,8 +16,9 @@
         <tr>
             <th>Id</th>
             <th>Task</th>
-            <th>Start</th>
-            <th>End</th>
+            <th>Priority</th>
+            <th>Status</th>
+            <th>Created at</th>
         </tr>
         </thead>
 
@@ -25,8 +26,9 @@
         <tr th:each="t,stat : ${tasks}">
             <td th:text="${stat.count}">1</td>
             <td th:text="${t.taskName}">Task name</td>
-            <td th:text="${t.taskStartTime}">00:00</td>
-            <td th:text="${t.taskEndTime}">00:00</td>
+            <td th:text="${t.priority}">Task Priority</td>
+            <td th:text="${t.isDone}">Status</td>
+            <td th:text="${#temporals.format(t.createdAt,'dd-MM-yyyy HH:mm')}">Created at</td>
 
             <td>
                 <form th:action="@{/tasks/remove}" method="post" style="display:inline;">
@@ -44,12 +46,19 @@
             <input name="id" placeholder="Integer"/>
             <button type="submit">Find</button>
         </form>
-        <form method="post" action = "/tasks/add">
-            <input name="taskName" placeholder="Task name"/>
-            <input name="taskStartTime" placeholder="Task start time (HH:mm)"/>
-            <input name="taskEndTime" placeholder="Task end time(HH:mm)"/>
+        <form th:action="@{/tasks/add}" th:object="${taskForm}"method="post">
+            <input th:field="*{taskName}" placeholder="What's your task?"/>
+            <select th:field="*{priority}">
+                <option value="">--Choose your priority!<--</option>
+                <option th:each="p : ${T(pl.pkorzec.model.Priority).values()}"
+                        th:value="${p}"
+                        th:text="${p}">
+
+                </option>
+            </select>
             <button type="submit">Add</button>
         </form>
+
         <form method="post" action = "/tasks/read">
             <button type="submit">Read your tasks from the CSV!</button>
         </form>

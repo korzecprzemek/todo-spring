@@ -14,6 +14,7 @@
     <table>
         <thead>
         <tr>
+            <th>Id</th>
             <th>Task</th>
             <th>Start</th>
             <th>End</th>
@@ -21,16 +22,28 @@
         </thead>
 
         <tbody>
-        <tr th:each="t : ${tasks}">
+        <tr th:each="t,stat : ${tasks}">
+            <td th:text="${stat.count}">1</td>
             <td th:text="${t.taskName}">Task name</td>
             <td th:text="${t.taskStartTime}">00:00</td>
             <td th:text="${t.taskEndTime}">00:00</td>
+
+            <td>
+                <form th:action="@{/tasks/remove}" method="post" style="display:inline;">
+                    <input type="hidden" name="id" th:value="${t.id}">
+                    <button type="submit">Done!</button>
+                </form>
+            </td>
         </tr>
         <tr th:if="${#lists.isEmpty(tasks)}">
             <td colspan="3">No Tasks!</td>
         </tr>
         </tbody>
     </table>
+        <form method="post" action = "/tasks/find">
+            <input name="id" placeholder="Integer"/>
+            <button type="submit">Find</button>
+        </form>
         <form method="post" action = "/tasks/add">
             <input name="taskName" placeholder="Task name"/>
             <input name="taskStartTime" placeholder="Task start time (HH:mm)"/>

@@ -1,23 +1,26 @@
 package pl.pkorzec.model;
 
-import java.time.LocalTime;
+import java.time.LocalDateTime;
 
 public class Task {
-    private String taskName;
-    private LocalTime taskStartTime;
-    private LocalTime taskEndTime;
     private Long id;
+    private String taskName;
+    private LocalDateTime createdAt;
+    private Priority priority;
+    private boolean isDone;
 
-    public Task(Long id,String taskName, LocalTime taskStartTime, LocalTime taskEndTime){
+    public Task(Long id, String taskName, Priority priority, boolean isDone, LocalDateTime createdAt) {
         this.id = id;
         this.taskName = taskName;
-        this.taskStartTime = taskStartTime;
-        this.taskEndTime = taskEndTime;
+        this.createdAt = createdAt;
+        this.priority = priority;
+        this.isDone = isDone;
     }
-    public Task(String taskName,LocalTime taskStartTime,LocalTime taskEndTime){
+    public Task(String taskName, Priority priority, boolean isDone, LocalDateTime createdAt) {
         this.taskName = taskName;
-        this.taskStartTime = taskStartTime;
-        this.taskEndTime = taskEndTime;
+        this.createdAt = createdAt;
+        this.priority = priority;
+        this.isDone = isDone;
     }
     public Long getId(){
         return this.id;
@@ -31,24 +34,43 @@ public class Task {
     public void setTaskName(String taskName){
         this.taskName = taskName;
     }
-    public LocalTime getTaskStartTime() {
-        return taskStartTime;
-    }
-    public void setTaskStartTime(LocalTime taskStartTime) {
-        this.taskStartTime = taskStartTime;
-    }
-    public LocalTime getTaskEndTime() {
-        return taskEndTime;
-    }
-    public void setTaskEndTime(LocalTime taskEndTime) {
-        this.taskEndTime = taskEndTime;
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
     }
 
-    public void updateTask(String taskName, LocalTime taskStartTime, LocalTime taskEndTime){
-        setTaskName(taskName);
-        setTaskStartTime(taskStartTime);
-        setTaskEndTime(taskEndTime);
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
     }
+
+    public Priority getPriority() {
+        return priority;
+    }
+
+    public void setPriority(Priority priority) {
+        this.priority = priority;
+    }
+
+    public boolean isDone() {
+        return isDone;
+    }
+
+    public void setDone(boolean done) {
+        isDone = done;
+    }
+
+    /**
+     * TODO
+     * @param taskName
+     */
+    public void updateTask(String taskName){
+        setTaskName(taskName);
+    }
+
+    /**
+     * TODO
+     * @return
+     */
     public String markTaskDone(){
     return "Task Done!";
     }

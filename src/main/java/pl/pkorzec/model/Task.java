@@ -7,20 +7,20 @@ public class Task {
     private String taskName;
     private LocalDateTime createdAt;
     private Priority priority;
-    private boolean isDone;
+    private boolean done;
 
     public Task(Long id, String taskName, Priority priority, boolean isDone, LocalDateTime createdAt) {
         this.id = id;
         this.taskName = taskName;
         this.createdAt = createdAt;
         this.priority = priority;
-        this.isDone = isDone;
+        this.done = isDone;
     }
     public Task(String taskName, Priority priority, boolean isDone, LocalDateTime createdAt) {
         this.taskName = taskName;
         this.createdAt = createdAt;
         this.priority = priority;
-        this.isDone = isDone;
+        this.done = isDone;
     }
     public Long getId(){
         return this.id;
@@ -52,11 +52,11 @@ public class Task {
     }
 
     public boolean isDone() {
-        return isDone;
+        return done;
     }
 
     public void setDone(boolean done) {
-        isDone = done;
+        this.done = done;
     }
 
     /**

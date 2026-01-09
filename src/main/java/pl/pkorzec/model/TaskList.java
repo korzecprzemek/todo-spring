@@ -12,8 +12,7 @@ public class TaskList {
     public void print(){
         for(Task task : taskList){
             System.out.println(task.getTaskName());
-            System.out.println(task.getTaskStartTime());
-            System.out.println(task.getTaskEndTime());
+            System.out.println(task.getPriority());
         }
     }
     public Task findById(Long id){

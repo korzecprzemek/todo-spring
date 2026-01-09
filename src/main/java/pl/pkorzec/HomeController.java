@@ -2,13 +2,13 @@ package pl.pkorzec;
 
 import com.opencsv.exceptions.CsvException;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.validation.BindingResult;
 import org.springframework.ui.Model;
 import jakarta.validation.Valid;
-
 
 import pl.pkorzec.model.*;
 
@@ -27,6 +27,7 @@ public class HomeController {
     @GetMapping("/")
     String index(Model model){
         model.addAttribute("tasks",taskService.getAll()) ;
+        model.addAttribute("taskForm",new TaskFormDTO("",null));
         return "index";
     }
     @PostMapping("/tasks/read")
@@ -42,18 +43,26 @@ public class HomeController {
         return "redirect:/";
     }
     @PostMapping("/tasks/add")
-    public String addTask(@Valid TaskFormDTO form, BindingResult result) {
-        taskService.addTask(
-                form.taskName(),
-                LocalTime.parse(form.taskStartTime()),
-                LocalTime.parse(form.taskEndTime())
-        );
+    public String addTask(@Valid @ModelAttribute("taskForm")TaskFormDTO form, BindingResult result) {
+        if(result.hasErrors()) return "index";
+        taskService.addFromForm(form);
+        return "redirect:/";
+    }
+    @PostMapping("tasks/find")
+    public String findTask(Long id){
+        Task task = taskService.findById(id);
+        System.out.println(task.getId());
+        System.out.println(task.getTaskName());
+        return "redirect:/";
+    }
+    @PostMapping("tasks/remove")
+    public String removeTask(Long id){
+        taskService.removeById(id);
         return "redirect:/";
     }
     @RequestMapping("/test")
     String test(){
         return "test.html";
     }
-
 
 }

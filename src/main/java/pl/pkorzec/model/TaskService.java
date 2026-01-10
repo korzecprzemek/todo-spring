@@ -32,6 +32,12 @@ public class TaskService {
         );
         return addTask(task);
     }
+    public void toggleDone(Long id){
+        boolean toggled = taskList.toggleById(id);
+        if(!toggled){
+            throw new TaskNotFoundException(id);
+        }
+    }
 
     public List<Task> getAll() {
         return taskList.getTaskList();
@@ -40,9 +46,13 @@ public class TaskService {
         taskList.print();
     }
     public Task findById(Long id){
-        return taskList.findById(id);
+        return taskList.findById(id)
+                .orElseThrow(() -> new TaskNotFoundException(id));
     }
     public void removeById(Long id){
-        taskList.removeById(id);
+        boolean removed = taskList.removeById(id);
+        if(!removed){
+            throw new TaskNotFoundException(id);
+        }
     }
 }

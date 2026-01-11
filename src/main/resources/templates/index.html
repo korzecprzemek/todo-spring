@@ -56,7 +56,7 @@
             <input th:field="*{taskName}" placeholder="What's your task?"/>
             <select th:field="*{priority}">
                 <option value="">--Choose your priority!<--</option>
-                <option th:each="p : ${T(pl.pkorzec.model.Priority).values()}"
+                <option th:each="p : ${T(pl.pkorzec.todo.domain.Priority).values()}"
                         th:value="${p}"
                         th:text="${p}">
 

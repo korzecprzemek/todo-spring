@@ -1,4 +1,4 @@
-package pl.pkorzec.model;
+package pl.pkorzec.todo.domain;
 
 public class TaskNotFoundException extends RuntimeException {
     public TaskNotFoundException(Long id) {

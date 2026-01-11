@@ -1,4 +1,4 @@
-package pl.pkorzec;
+package pl.pkorzec.todo.web;
 
 import com.opencsv.exceptions.CsvException;
 import org.springframework.stereotype.Controller;
@@ -7,10 +7,11 @@ import org.springframework.validation.BindingResult;
 import org.springframework.ui.Model;
 import jakarta.validation.Valid;
 
-import pl.pkorzec.model.*;
+import pl.pkorzec.todo.application.TaskCsvReader;
+import pl.pkorzec.todo.application.TaskService;
+import pl.pkorzec.todo.domain.Task;
 
 import java.io.IOException;
-import java.time.LocalTime;
 
 @Controller
 public class HomeController {

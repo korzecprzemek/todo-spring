@@ -1,6 +1,5 @@
-package pl.pkorzec.model;
+package pl.pkorzec.todo.domain;
 
-import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;

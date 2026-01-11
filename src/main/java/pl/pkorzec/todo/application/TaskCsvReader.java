@@ -1,14 +1,14 @@
-package pl.pkorzec.model;
+package pl.pkorzec.todo.application;
 
 
 import com.opencsv.CSVReader;
 import com.opencsv.exceptions.CsvException;
+import pl.pkorzec.todo.domain.Priority;
+import pl.pkorzec.todo.domain.Task;
 
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import java.time.LocalDate;
-import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 

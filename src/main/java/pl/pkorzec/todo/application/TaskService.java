@@ -1,8 +1,12 @@
-package pl.pkorzec.model;
+package pl.pkorzec.todo.application;
 
 import org.springframework.stereotype.Service;
+import pl.pkorzec.todo.domain.Priority;
+import pl.pkorzec.todo.domain.Task;
+import pl.pkorzec.todo.domain.TaskList;
+import pl.pkorzec.todo.domain.TaskNotFoundException;
+import pl.pkorzec.todo.web.TaskFormDTO;
 
-import java.time.LocalTime;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
 import java.time.LocalDateTime;
@@ -44,6 +48,7 @@ public class TaskService {
     }
     public void print(){
         taskList.print();
+
     }
     public Task findById(Long id){
         return taskList.findById(id)

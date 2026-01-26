@@ -9,3 +9,7 @@ and presents the list as a table.
 - learn a new database engine
 - deploy the application
 - wrap this with a neat front-end
+
+## How to run:
+```docker exec -it todo-postgres psql -U todo -d todo```
+```mvn spring-boot:run```

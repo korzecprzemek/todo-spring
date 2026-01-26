@@ -1,11 +1,9 @@
 package pl.pkorzec.todo.application;
 
 import org.springframework.stereotype.Service;
-import pl.pkorzec.todo.domain.Priority;
-import pl.pkorzec.todo.domain.Task;
-import pl.pkorzec.todo.domain.TaskList;
-import pl.pkorzec.todo.domain.TaskNotFoundException;
+import pl.pkorzec.todo.domain.*;
 import pl.pkorzec.todo.web.TaskFormDTO;
+import pl.pkorzec.todo.domain.TaskRepository;
 
 import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
@@ -13,21 +11,25 @@ import java.time.LocalDateTime;
 
 @Service
 public class TaskService {
-    private final TaskList taskList = new TaskList();
-    private final AtomicLong nextId = new AtomicLong(1);
+    /// /    private final TaskList taskList = new TaskList();
+//    private final AtomicLong nextId = new AtomicLong(1);
+    private TaskRepository taskRepository;
 
-    public Task addTask(Task task){
-        task.setId(nextId.getAndIncrement());
-        if(task.getCreatedAt() == null){
+    public TaskService(TaskRepository taskRepository) {
+        this.taskRepository = taskRepository;
+    }
+
+    public Task addTask(Task task) {
+        if (task.getCreatedAt() == null) {
             task.setCreatedAt(LocalDateTime.now());
         }
-        if(task.getPriority() == null){
+        if (task.getPriority() == null) {
             task.setPriority(Priority.MEDIUM);
         }
-        taskList.addTask(task);
-        return task;
+        return taskRepository.save(task);
     }
-    public Task addFromForm(TaskFormDTO dto){
+
+    public Task addFromForm(TaskFormDTO dto) {
         Task task = new Task(
                 dto.taskName(),
                 dto.priority(),
@@ -36,28 +38,26 @@ public class TaskService {
         );
         return addTask(task);
     }
-    public void toggleDone(Long id){
-        boolean toggled = taskList.toggleById(id);
-        if(!toggled){
-            throw new TaskNotFoundException(id);
-        }
+
+    public void toggleDone(Long id) {
+        Task task = findById(id);
+        task.setDone(!task.isDone());
+        taskRepository.save(task);
     }
 
     public List<Task> getAll() {
-        return taskList.getTaskList();
+        return taskRepository.findAll();
     }
-    public void print(){
-        taskList.print();
 
-    }
-    public Task findById(Long id){
-        return taskList.findById(id)
+    public Task findById(Long id) {
+        return taskRepository.findById(id)
                 .orElseThrow(() -> new TaskNotFoundException(id));
     }
-    public void removeById(Long id){
-        boolean removed = taskList.removeById(id);
-        if(!removed){
+
+    public void removeById(Long id) {
+        if (!taskRepository.existsById(id)) {
             throw new TaskNotFoundException(id);
         }
+        taskRepository.deleteById(id);
     }
 }

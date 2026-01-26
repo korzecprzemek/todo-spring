@@ -32,9 +32,6 @@ public class TaskCsvReader {
                         false,
                         null
                 );
-                t.setTaskName(name);
-                t.setPriority(Priority.fromString(priorityRaw));
-                t.setDone(false);
                 taskList.add(t);
             }
         }

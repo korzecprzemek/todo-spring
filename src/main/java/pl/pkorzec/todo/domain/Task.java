@@ -1,14 +1,20 @@
 package pl.pkorzec.todo.domain;
 
 import java.time.LocalDateTime;
+import jakarta.persistence.*;
 
+@Entity
 public class Task {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String taskName;
     private LocalDateTime createdAt;
+    @Enumerated(EnumType.STRING)
     private Priority priority;
     private boolean done;
 
+    protected Task(){ };
     public Task(Long id, String taskName, Priority priority, boolean isDone, LocalDateTime createdAt) {
         this.id = id;
         this.taskName = taskName;

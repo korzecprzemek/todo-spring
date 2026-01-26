@@ -3,10 +3,9 @@ package pl.pkorzec.todo.application;
 import org.springframework.stereotype.Service;
 import pl.pkorzec.todo.domain.*;
 import pl.pkorzec.todo.web.TaskFormDTO;
-import pl.pkorzec.todo.domain.TaskRepository;
+import pl.pkorzec.todo.persistence.TaskRepository;
 
 import java.util.List;
-import java.util.concurrent.atomic.AtomicLong;
 import java.time.LocalDateTime;
 
 @Service

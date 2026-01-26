@@ -1,4 +1,4 @@
-package pl.pkorzec.todo.domain;
+package pl.pkorzec.todo.persistence;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import pl.pkorzec.todo.domain.Task;

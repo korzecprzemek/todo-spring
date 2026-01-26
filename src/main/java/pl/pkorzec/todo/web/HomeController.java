@@ -8,10 +8,12 @@ import org.springframework.ui.Model;
 import jakarta.validation.Valid;
 
 import pl.pkorzec.todo.application.TaskCsvReader;
+import pl.pkorzec.todo.application.TaskQuery;
 import pl.pkorzec.todo.application.TaskService;
 import pl.pkorzec.todo.domain.Task;
 
 import java.io.IOException;
+import java.util.List;
 
 @Controller
 public class HomeController {
@@ -23,11 +25,12 @@ public class HomeController {
     }
 
     @GetMapping("/")
-    String index(Model model){
-        model.addAttribute("tasks",taskService.getAll()) ;
-        model.addAttribute("taskForm",new TaskFormDTO("",null));
+    String index(TaskQuery query, Model model) {
+        model.addAttribute("tasks", taskService.findTasks(query));
+        model.addAttribute("taskForm", new TaskFormDTO("", null));
         return "index";
     }
+
     @PostMapping("/tasks/read")
     public String readTasks(){
         TaskCsvReader tasksReader = new TaskCsvReader();
@@ -67,5 +70,4 @@ public class HomeController {
         taskService.toggleDone(id);
         return "redirect:/";
     }
-
 }

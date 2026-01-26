@@ -59,4 +59,29 @@ public class TaskService {
         }
         taskRepository.deleteById(id);
     }
+    public List<Task> findTasks(TaskQuery query) {
+        List<Task> tasks = taskRepository.findAll();
+
+        if (query.getDone() != null) {
+            tasks = tasks.stream()
+                    .filter(task -> task.isDone() == query.getDone())
+                    .toList();
+        }
+
+        if (query.getPriority() != null) {
+            tasks = tasks.stream()
+                    .filter(task -> task.getPriority() == query.getPriority())
+                    .toList();
+        }
+
+        if (query.getSearch() != null && !query.getSearch().isBlank()) {
+            String searchLower = query.getSearch().toLowerCase();
+            tasks = tasks.stream()
+                    .filter(task -> task.getTaskName().toLowerCase().contains(searchLower))
+                    .toList();
+        }
+
+        return tasks;
+    }
+
 }

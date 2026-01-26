@@ -11,6 +11,35 @@
 </head>
 <body>
     <h1>These are Your tasks for today!</h1>
+    <form method="get" action="/">
+        <div>
+            <label for="search">Search:</label>
+            <input type="text" id="search" name="search"
+                   th:value="${param.search}">
+        </div>
+
+        <div>
+            <label for="done">Status:</label>
+            <select id="done" name="done">
+                <option value="">All</option>
+                <option value="true" th:selected="${param.done == 'true'}">Done</option>
+                <option value="false" th:selected="${param.done == 'false'}">Not done</option>
+            </select>
+        </div>
+
+        <div>
+            <label for="priority">Priority:</label>
+            <select id="priority" name="priority">
+                <option value="">All</option>
+                <option value="LOW" th:selected="${param.priority == 'LOW'}">Low</option>
+                <option value="MEDIUM" th:selected="${param.priority == 'MEDIUM'}">Medium</option>
+                <option value="HIGH" th:selected="${param.priority == 'HIGH'}">High</option>
+            </select>
+        </div>
+
+        <button type="submit">Filter</button>
+    </form>
+
     <table>
         <thead>
         <tr>

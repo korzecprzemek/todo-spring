@@ -11,5 +11,6 @@ and presents the list as a table.
 - wrap this with a neat front-end
 
 ## How to run:
-```docker exec -it todo-postgres psql -U todo -d todo```
+```docker compose up -d```<br>
+```docker exec -it todo-postgres psql -U todo -d todo```<br>
 ```mvn spring-boot:run```

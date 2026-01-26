@@ -1,14 +1,36 @@
 # To-Do List Web Application 
 
-## A simple web application built with Spring Boot
+ A simple web application built with Spring Boot
 
-Allows the user to add, remove and read tasks from a .csv file <br>
-and presents the list as a table.
+Features:
+- Create, toggle and delete tasks
+- Persist tasks in PostgreSQL
+- Display tasks as a table (Thymeleaf)
+- Import tasks from a CSV file
+
 ## Goals
 - to build a robust backend architecture
-- learn a new database engine
+- learn database engine
 - deploy the application
 - wrap this with a neat front-end
+
+## Tech Stack
+
+### Backend
+- Java 17
+- Spring Boot
+- Spring Data JPA
+
+### Database
+- PostgreSQL
+
+### Frontend
+- Thymeleaf
+
+### Build & Tools
+- Maven
+- Docker
+
 
 ## How to run:
 ```docker compose up -d```<br>

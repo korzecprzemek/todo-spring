@@ -31,8 +31,27 @@ Features:
 - Maven
 - Docker
 
+## How to run
 
-## How to run:
-```docker compose up -d```<br>
-```docker exec -it todo-postgres psql -U todo -d todo```<br>
-```mvn spring-boot:run```
+```bash
+docker compose up -d
+docker exec -it todo-postgres psql -U todo -d todo
+mvn spring-boot:run
+```
+## Project structure (simplified)
+```text
+src/main/java/pl/pkorzec/todo
+├── application        # business logic and use cases
+│   ├── TaskService.java
+│   └── TaskCsvReader.java
+├── domain             # core domain model
+│   ├── Task.java
+│   ├── Priority.java
+│   └── TaskNotFoundException.java
+├── persistence        # data access layer (JPA)
+│   └── TaskRepository.java
+└── web                # web layer (controllers, DTOs)
+    ├── HomeController.java
+    └── TaskFormDTO.java
+```
+

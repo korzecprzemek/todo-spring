@@ -1,9 +1,12 @@
 package pl.pkorzec.todo.application;
 
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import pl.pkorzec.todo.domain.*;
 import pl.pkorzec.todo.web.dto.TaskFormDTO;
 import pl.pkorzec.todo.persistence.TaskRepository;
+import pl.pkorzec.todo.persistence.UserRepository;
 
 import java.util.List;
 import java.time.LocalDateTime;
@@ -13,11 +16,23 @@ public class TaskService {
     /// /    private final TaskList taskList = new TaskList();
 //    private final AtomicLong nextId = new AtomicLong(1);
     private TaskRepository taskRepository;
+    private UserRepository userRepository;
 
-    public TaskService(TaskRepository taskRepository) {
+    public TaskService(TaskRepository taskRepository, UserRepository userRepository) {
         this.taskRepository = taskRepository;
+        this.userRepository = userRepository;
+    }
+    private String currentUsername(){
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        return auth.getName();
+    }
+    private User currentUser() {
+        return userRepository.findByUsername(currentUsername())
+                .orElseThrow(() -> new IllegalStateException("Current user not found in DB"));
     }
     public Task addTask(Task task) {
+        task.setOwner(currentUser());
+
         if (task.getCreatedAt() == null) {
             task.setCreatedAt(LocalDateTime.now());
         }
@@ -41,7 +56,7 @@ public class TaskService {
         taskRepository.save(task);
     }
     public List<Task> getAll() {
-        return taskRepository.findAll();
+        return taskRepository.findAllByOwnerUsername(currentUsername());
     }
     public Task findById(Long id) {
         return taskRepository.findById(id)
@@ -54,7 +69,7 @@ public class TaskService {
         taskRepository.deleteById(id);
     }
     public List<Task> findTasks(TaskQuery query) {
-        List<Task> tasks = taskRepository.findAll();
+        List<Task> tasks = taskRepository.findAllByOwnerUsername(currentUsername());
 
         if (query.getDone() != null) {
             tasks = tasks.stream()

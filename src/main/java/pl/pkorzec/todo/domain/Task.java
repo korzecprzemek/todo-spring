@@ -13,6 +13,9 @@ public class Task {
     @Enumerated(EnumType.STRING)
     private Priority priority;
     private boolean done;
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @JoinColumn(name="user_id")
+    private User owner;
 
     protected Task(){ };
     public Task(Long id, String taskName, Priority priority, boolean isDone, LocalDateTime createdAt) {
@@ -65,6 +68,12 @@ public class Task {
         this.done = done;
     }
 
+    public User getOwner() {
+        return owner;
+    }
+    public void setOwner(User owner) {
+        this.owner = owner;
+    }
     /**
      * TODO
      * @param taskName

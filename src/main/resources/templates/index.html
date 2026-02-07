@@ -18,6 +18,7 @@
                    th:value="${param.search}">
         </div>
 
+
         <div>
             <label for="done">Status:</label>
             <select id="done" name="done">
@@ -38,6 +39,11 @@
         </div>
 
         <button type="submit">Filter</button>
+    </form>
+
+    <form th:action="@{/logout}" method="post">
+        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+        <button type="submit">Wyloguj</button>
     </form>
 
     <table>

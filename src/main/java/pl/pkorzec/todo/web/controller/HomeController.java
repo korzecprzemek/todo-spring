@@ -1,4 +1,4 @@
-package pl.pkorzec.todo.web;
+package pl.pkorzec.todo.web.controller;
 
 import com.opencsv.exceptions.CsvException;
 import org.springframework.stereotype.Controller;
@@ -11,9 +11,9 @@ import pl.pkorzec.todo.application.TaskCsvReader;
 import pl.pkorzec.todo.application.TaskQuery;
 import pl.pkorzec.todo.application.TaskService;
 import pl.pkorzec.todo.domain.Task;
+import pl.pkorzec.todo.web.dto.TaskFormDTO;
 
 import java.io.IOException;
-import java.util.List;
 
 @Controller
 public class HomeController {

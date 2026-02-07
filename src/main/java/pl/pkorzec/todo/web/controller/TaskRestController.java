@@ -1,4 +1,4 @@
-package pl.pkorzec.todo.web;
+package pl.pkorzec.todo.web.controller;
 
 import org.springframework.web.bind.annotation.*;
 

@@ -1,25 +1,35 @@
 # To-Do List Web Application 
 
- A simple web application built with Spring Boot
+ A simple web application built with Spring Boot and Thymeleaf with user authentification.
 
 Features:
+- User registration and login (Spring Security and BCrypt)
+- Each user has their own tasks
 - Create, toggle and delete tasks
 - Persist tasks in PostgreSQL
 - Display tasks as a table (Thymeleaf)
 - Import tasks from a CSV file
+- Session-based authentification
+- REST endpoints for API testing
 
 ## Goals
 - to build a robust backend architecture
-- learn database engine
+- learn database engine (PostgreSQL)
+- learn authentication & authorization (Spring Security)
 - deploy the application
 - wrap this with a neat front-end
 
+## Roadmap
+- JWT authentication for REST API
+- Roles (admin/users)
+- Frontend (possibly Angular)
 ## Tech Stack
 
 ### Backend
 - Java 17
 - Spring Boot
 - Spring Data JPA
+- Spring Security
 
 ### Database
 - PostgreSQL
@@ -35,8 +45,11 @@ Features:
 
 ```bash
 docker compose up -d
-docker exec -it todo-postgres psql -U todo -d todo
 mvn spring-boot:run
+```
+## Connect to DB:
+```bash
+docker exec -it todo-postgres psql -U todo -d todo
 ```
 ## Project structure (simplified)
 ```text

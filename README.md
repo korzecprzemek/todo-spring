@@ -51,6 +51,12 @@ mvn spring-boot:run
 ```bash
 docker exec -it todo-postgres psql -U todo -d todo
 ```
+## API testing:
+```bash
+curl -i -X POST http://localhost:8080/auth/signup -H "Content-Type: application/json" -d '{"username": "xxx", "password":"xxx"}'
+
+curl -i -X POST http://localhost:8080/auth/login -H "Content-Type: application/json" -d '{"username": "xxx","password:"xxx"}'
+```
 ## Project structure (simplified)
 ```text
 src/main/java/pl/pkorzec/todo

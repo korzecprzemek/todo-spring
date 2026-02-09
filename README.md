@@ -58,19 +58,37 @@ curl -i -X POST http://localhost:8080/auth/signup -H "Content-Type: application/
 curl -i -X POST http://localhost:8080/auth/login -H "Content-Type: application/json" -d '{"username": "xxx","password:"xxx"}'
 ```
 ## Project structure (simplified)
+
+
 ```text
-src/main/java/pl/pkorzec/todo
-├── application        # business logic and use cases
-│   ├── TaskService.java
-│   └── TaskCsvReader.java
-├── domain             # core domain model
-│   ├── Task.java
-│   ├── Priority.java
-│   └── TaskNotFoundException.java
-├── persistence        # data access layer (JPA)
-│   └── TaskRepository.java
-└── web                # web layer (controllers, DTOs)
-    ├── HomeController.java
-    └── TaskFormDTO.java
+todo
+├── application
+│   ├── TaskCsvReader.java
+│   ├── TaskQuery.java
+│   ├── TaskService.java
+│   ├── UserAuthService.java
+│   └── UserService.java
+├── config
+│   └── SecurityConfig.java
+├── domain
+│   ├── Priority.java
+│   ├── Task.java
+│   ├── TaskNotFoundException.java
+│   └── User.java
+├── persistence
+│   ├── TaskRepository.java
+│   └── UserRepository.java
+└── web
+├── ApiExceptionHandler.java
+├── controller
+│   ├── AuthController.java
+│   ├── HomeController.java
+│   └── TaskRestController.java
+└── dto
+│   ├── LoginRequest.java
+│   ├── RegisterUserRequest.java
+│   ├── TaskFormDTO.java
+│   └── UserResponse.java
+
 ```
 

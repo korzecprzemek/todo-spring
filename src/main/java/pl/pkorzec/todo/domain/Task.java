@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import jakarta.persistence.*;
 
 @Entity
+@Table(name = "tasks")
 public class Task {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -16,6 +17,7 @@ public class Task {
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     @JoinColumn(name="user_id")
     private User owner;
+    private Long taskListId;
 
     protected Task(){ };
     public Task(Long id, String taskName, Priority priority, boolean isDone, LocalDateTime createdAt) {

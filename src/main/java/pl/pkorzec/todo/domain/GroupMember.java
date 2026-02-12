@@ -16,14 +16,6 @@ public class GroupMember {
     Role role;
     LocalDateTime joinedAt;
 
-    public GroupMember(Long id, Long userId, Long groupId, Role role, LocalDateTime joinedAt) {
-        this.id = id;
-        this.userId = userId;
-        this.groupId = groupId;
-        this.role = role;
-        this.joinedAt = joinedAt;
-    }
-
     public GroupMember(Long userId, Long groupId, Role role, LocalDateTime joinedAt) {
         this.userId = userId;
         this.groupId = groupId;

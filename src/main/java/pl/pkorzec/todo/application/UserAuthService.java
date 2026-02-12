@@ -1,5 +1,7 @@
 package pl.pkorzec.todo.application;
 
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -15,7 +17,14 @@ public class UserAuthService implements UserDetailsService {
     public UserAuthService(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
-
+    public String currentUsername(){
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        return auth.getName();
+    }
+    public User currentUser() {
+        return userRepository.findByUsername(currentUsername())
+                .orElseThrow(() -> new IllegalStateException("Current user not found in DB"));
+    }
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = userRepository.findByUsername(username)

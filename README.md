@@ -1,28 +1,33 @@
 # To-Do List Web Application 
 
- A simple web application built with Spring Boot and Thymeleaf with user authentification.
+ A web application built with Spring Boot providing REST API for managing tasks in **private lists** and **shared group lists** with authentication and authorization
 
 Features:
 - User registration and login (Spring Security and BCrypt)
-- Each user has their own tasks
+- Private task lists (I called them 'Inbox')
+- Group task lists shared between users
+- Groups with roles(OWNER, MEMBER)
+- Add users to groups(Owner only)
 - Create, toggle and delete tasks
 - Persist tasks in PostgreSQL
 - Display tasks as a table (Thymeleaf)
 - Import tasks from a CSV file
 - Session-based authentification
-- REST endpoints for API testing
+- REST API for testing and frontend integration (in the future)
 
 ## Goals
-- to build a robust backend architecture
-- learn database engine (PostgreSQL)
+- to build a robust backend architecture (REST + domain services)
+- learn PostgreSQL and DB migrations
 - learn authentication & authorization (Spring Security)
-- deploy the application
-- wrap this with a neat front-end
+- prepare backend for future frontend
+- prepare for deployment
 
 ## Roadmap
 - JWT authentication for REST API
+- Group permissions (editors, viewers)
+- Sharing links to groups
 - Roles (admin/users)
-- Frontend (possibly Angular)
+- Frontend (React/Angular)
 ## Tech Stack
 
 ### Backend
@@ -35,7 +40,7 @@ Features:
 - PostgreSQL
 
 ### Frontend
-- Thymeleaf
+- Thymeleaf (legacy UI)
 
 ### Build & Tools
 - Maven

@@ -1,6 +1,6 @@
 # To-Do List Web Application 
 
- A simple web application built with Spring Boot and Thymeleaf with user authentification.
+ A simple web application built with Spring Boot and Thymeleaf with user authentication.
 
 Features:
 - User registration and login (Spring Security and BCrypt)
